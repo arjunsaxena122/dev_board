@@ -4,7 +4,10 @@ import { ApiError } from "../utils/api-error";
 import prisma from "../db/db";
 import { ApiResponse } from "../utils/api-response";
 import bcrypt from "bcryptjs";
-import { randomString } from "../utils/randomBytes";
+import { env } from "../config/config";
+import jwt from "jsonwebtoken";
+import { generatAccessAndRefreshToken } from "../utils/generateToken";
+import { Iuser } from "../middlewares/auth.middleware";
 
 export const userRegister = asyncHandler(
   async (req: Request, res: Response) => {
@@ -93,8 +96,72 @@ export const userLogin = asyncHandler(async (req: Request, res: Response) => {
   if (!loggedInUser) {
     throw new ApiError(500, "Internal Server issue with Login");
   }
+
+  const { accessToken, refreshToken } = await generatAccessAndRefreshToken(
+    user?.id,
+  );
+
+  const accessOptions = {
+    httpOnly: true,
+    secure: true,
+    strict: env.NODE_ENV === "development" ? "none" : "strict",
+    maxAge: 1000 * 60 * 30,
+  };
+
+  const refreshOption = {
+    httpOnly: true,
+    secure: true,
+    strict: env.NODE_ENV === "development" ? "none" : "strict",
+    maxAge: 1000 * 60 * 60 * 24,
+  };
+
+  return res
+    .cookie("accessToken", accessToken, accessOptions)
+    .cookie("refreshToken", refreshToken, refreshOption)
+    .json(new ApiResponse(200, "Login successfully", loggedInUser));
 });
 
-export const userLogout = asyncHandler(
-  async (req: Request, res: Response) => {},
-);
+export const userLogout = asyncHandler(async (req: Request, res: Response) => {
+  const { id } = (req as Iuser).user;
+
+  if (!id) {
+    throw new ApiError(400, "requested id not found");
+  }
+
+  const user = await prisma.user.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  if (!user) {
+    throw new ApiError(400, "user not found");
+  }
+
+  const updatedUser = await prisma.user.update({
+    where: { id },
+    data: { refreshToken: null },
+    select: {
+      id: true,
+      username: true,
+      email: true,
+      isEmailVerified: true,
+    },
+  });
+
+  if (!updatedUser) {
+    throw new ApiError(500, "Internal server issue with user logout");
+  }
+
+  const options = {
+    httpOnly: true,
+    secure: true,
+    strict: env.NODE_ENV === "development" ? "none" : "strict",
+  };
+
+  return res
+    .clearCookie("accessToken", options)
+    .clearCookie("refreshToken", options)
+    .status(200)
+    .json(new ApiResponse(200, "Logout successfully", updatedUser));
+});

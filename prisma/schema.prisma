@@ -19,6 +19,12 @@ enum Roles {
   USER
 }
 
+enum Status {
+  TODO
+  PENDING
+  DONE
+}
+
 model Avatar {
   id        String   @id @default(cuid())
   url       String   @default("https://placehold.co/600x400")
@@ -31,9 +37,8 @@ model Avatar {
 
 model User {
   id                          String    @id @default(cuid())
-  avatar                      String    @default("")
   username                    String    @unique
-  fullname                    String   @default("John Doe")
+  fullname                    String    @default("John Doe")
   email                       String    @unique
   isEmailVerified             Boolean   @default(false)
   password                    String
@@ -45,5 +50,24 @@ model User {
   role                        Roles     @default(USER)
   createdAt                   DateTime  @default(now())
   updatedAt                   DateTime  @updatedAt()
-  Avatar                      Avatar?
+  avatar                      Avatar?
+  Project                     Project[]
+}
+
+model Project {
+  id          String @id @default(cuid())
+  title       String @unique
+  description String
+  createdById String @unique
+  createdBy   User   @relation(fields: [createdById], references: [id], onDelete: Cascade)
+  Task        Task[]
+}
+
+model Task {
+  id          String  @id @default(cuid())
+  title       String  @unique
+  description String
+  status      Status  @default(TODO)
+  projectId   String
+  project     Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
 }

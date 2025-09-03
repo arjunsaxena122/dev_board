@@ -9,6 +9,10 @@ dotenv.config({
 const envSchema = z.object({
   PORT: z.string().optional(),
   NODE_ENV: z.string().optional(),
+  ACCESS_TOKEN_KEY: z.string().min(1),
+  ACCESS_TOKEN_EXPIRY: z.string().min(1),
+  REFRESH_TOKEN_KEY: z.string().min(1),
+  REFRESH_TOKEN_EXPIRY: z.string().min(1),
 });
 
 const createEnv = (env: NodeJS.ProcessEnv) => {
@@ -21,6 +25,11 @@ const createEnv = (env: NodeJS.ProcessEnv) => {
   return validateResult.data;
 };
 
-
-export const env = createEnv(process.env);
-
+export const env = createEnv(process.env) as {
+  ACCESS_TOKEN_KEY: string;
+  ACCESS_TOKEN_EXPIRY: string;
+  REFRESH_TOKEN_KEY: string;
+  REFRESH_TOKEN_EXPIRY: string;
+  PORT?: string;
+  NODE_ENV?: string;
+};

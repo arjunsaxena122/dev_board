@@ -131,7 +131,6 @@ exports.Prisma.AvatarScalarFieldEnum = {
 
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
-  avatar: 'avatar',
   username: 'username',
   fullname: 'fullname',
   email: 'email',
@@ -145,6 +144,21 @@ exports.Prisma.UserScalarFieldEnum = {
   role: 'role',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ProjectScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  createdById: 'createdById'
+};
+
+exports.Prisma.TaskScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  status: 'status',
+  projectId: 'projectId'
 };
 
 exports.Prisma.SortOrder = {
@@ -166,9 +180,17 @@ exports.Roles = exports.$Enums.Roles = {
   USER: 'USER'
 };
 
+exports.Status = exports.$Enums.Status = {
+  TODO: 'TODO',
+  PENDING: 'PENDING',
+  DONE: 'DONE'
+};
+
 exports.Prisma.ModelName = {
   Avatar: 'Avatar',
-  User: 'User'
+  User: 'User',
+  Project: 'Project',
+  Task: 'Task'
 };
 
 /**

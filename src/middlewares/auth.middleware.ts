@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from "express";
 import { ApiError } from "../utils/api-error";
 import jwt from "jsonwebtoken";
 import { env } from "../config/config";
-import prisma from "../db/db";
 
 export interface Iuser extends Request {
   user: jwt.JwtPayload;
@@ -14,7 +13,7 @@ const verifyJwt = async (req: Request, res: Response, next: NextFunction) => {
     req?.headers.authorization?.replace("Bearer ", "");
 
   if (!token) {
-    throw new ApiError(400, "token not exist");
+    throw new ApiError(400, "ACCESS DENIED: unauthorised access");
   }
 
   const decodeToken = jwt.verify(token, env.ACCESS_TOKEN_KEY) as jwt.JwtPayload;

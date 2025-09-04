@@ -1,6 +1,8 @@
 import express, { Application } from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import { limiter } from "./utils/rate-limiter";
+
 
 const app: Application = express();
 
@@ -25,11 +27,10 @@ import taskRouter from "./routes/task.route";
 
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/project", projectRouter);
-app.use("/api/v1//project/:pid/task", taskRouter);
+app.use("/api/v1/project/:pid/task", taskRouter);
 
 // Error Middleware
 import errorHandler from "./middlewares/error.middleware";
-import { limiter } from "./utils/rate-limiter";
 app.use(errorHandler);
 
 export default app;

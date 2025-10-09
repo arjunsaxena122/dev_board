@@ -11,12 +11,6 @@
 
 - bcrypt.js – Secure password hashing
 
-
-## 👥 Roles Involved
-- **Student**: View announcements, results, courses
-- **Faculty**: Upload course materials, post announcements
-- **Admin**: Manage users, publish results, full access
-
 ## 🧩 API Overview
 
 ### 🔐 Auth & API Key:

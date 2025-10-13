@@ -7,7 +7,6 @@ import {
 import { validate } from "../middlewares/validate.middleware";
 import { userApiKeyValidationSchema, userGetValidationSchema, userLogoutValidationSchema, userRegisterValidationSchema } from "../validators/user.validator";
 import { verifyJwt } from "../middlewares/auth.middleware";
-import { zodRequestedSource } from "../utils/constants";
 
 const router: Router = Router();
 

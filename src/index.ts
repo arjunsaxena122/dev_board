@@ -2,7 +2,7 @@ import app from "./app";
 import prisma from "./db/db";
 import { env } from "./config/config";
 
-const port = Number(env.PORT)
+const port = Number(env.PORT ?? 3000)
 
 prisma
   .$connect()

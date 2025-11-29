@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
     "dev": "nodemon --watch 'src/**/*.ts' --ext ts --exec ts-node src/index.ts",
     "prisma:generate": "prisma generate",
@@ -12,9 +13,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.18.2",
+  "packageManager": "pnpm@10.24.0",
   "dependencies": {
-    "@prisma/client": "^6.17.1",
+    "@prisma/adapter-pg": "^7.0.1",
+    "@prisma/client": "^7.0.1",
     "bcryptjs": "^3.0.2",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
@@ -22,7 +24,7 @@
     "express": "^5.1.0",
     "express-rate-limit": "^7.5.1",
     "jsonwebtoken": "^9.0.2",
-    "prisma": "^6.17.1",
+    "pg": "^8.16.3",
     "zod": "^3.25.67"
   },
   "devDependencies": {
@@ -31,7 +33,9 @@
     "@types/express": "^5.0.3",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^24.0.3",
+    "@types/pg": "^8.15.6",
     "nodemon": "^3.1.10",
+    "prisma": "^7.0.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   }

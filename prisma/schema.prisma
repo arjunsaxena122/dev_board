@@ -1,27 +1,10 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
+  output   = "../generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-
-enum Roles {
-  ADMIN
-  USER
-}
-
-enum Status {
-  TODO
-  PENDING
-  DONE
 }
 
 model Avatar {
@@ -30,7 +13,7 @@ model Avatar {
   localPath String   @default("")
   userId    String   @unique
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt()
+  updatedAt DateTime @updatedAt
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
@@ -48,9 +31,9 @@ model User {
   forgetValidationTokenExpiry DateTime?
   role                        Roles     @default(USER)
   createdAt                   DateTime  @default(now())
-  updatedAt                   DateTime  @updatedAt()
+  updatedAt                   DateTime  @updatedAt
   avatar                      Avatar?
-  Project                     Project[]
+  Project                     Project?
 }
 
 model Project {
@@ -69,4 +52,15 @@ model Task {
   status      Status  @default(TODO)
   projectId   String
   project     Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+enum Roles {
+  ADMIN
+  USER
+}
+
+enum Status {
+  TODO
+  PENDING
+  DONE
 }

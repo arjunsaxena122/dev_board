@@ -1,5 +1,5 @@
 import app from "./app";
-import prisma from "./db/db";
+import { prisma } from "./lib/prisma"
 import { env } from "./config/config";
 
 const port = Number(env.PORT ?? 3000)

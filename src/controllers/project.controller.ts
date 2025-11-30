@@ -60,7 +60,7 @@ export const getAllProjects = asyncHandler(
 
     const allUserProject = await prisma.project.findMany({
       where: {
-        createdById: id,
+        createdById: String(id),
       },
     });
 

@@ -12,11 +12,6 @@ export const createProjectValidationSchema = z.object({
   })
 });
 
-export const getAllProjectValidationSchema = z.object({
-  id: z.string().cuid({
-    message: "userId is required"
-  }),
-});
 
 export const getProjectByIdtValidationSchema = z.object({
   pid: z.string().cuid({
@@ -33,7 +28,7 @@ export const updateProjectByIdtValidationSchema = z.object({
   }),
   description: z.string({
     message: "Description is required"
-  })
+  }).optional()
 });
 
 export const deleteProjectByIdtValidationSchema = z.object({

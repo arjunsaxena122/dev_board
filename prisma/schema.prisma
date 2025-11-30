@@ -44,14 +44,14 @@ model User {
   createdAt                   DateTime  @default(now())
   updatedAt                   DateTime  @updatedAt
   avatar                      Avatar?
-  Project                     Project?
+  Project                     Project[]
 }
 
 model Project {
   id          String   @id @default(cuid())
   title       String   @unique
   description String
-  createdById String   @unique
+  createdById String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   createdBy   User     @relation(fields: [createdById], references: [id], onDelete: Cascade)

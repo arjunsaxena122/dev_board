@@ -30,6 +30,8 @@ export type TaskMinAggregateOutputType = {
   description: string | null
   status: $Enums.Status | null
   projectId: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type TaskMaxAggregateOutputType = {
@@ -38,6 +40,8 @@ export type TaskMaxAggregateOutputType = {
   description: string | null
   status: $Enums.Status | null
   projectId: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type TaskCountAggregateOutputType = {
@@ -46,6 +50,8 @@ export type TaskCountAggregateOutputType = {
   description: number
   status: number
   projectId: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -56,6 +62,8 @@ export type TaskMinAggregateInputType = {
   description?: true
   status?: true
   projectId?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type TaskMaxAggregateInputType = {
@@ -64,6 +72,8 @@ export type TaskMaxAggregateInputType = {
   description?: true
   status?: true
   projectId?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type TaskCountAggregateInputType = {
@@ -72,6 +82,8 @@ export type TaskCountAggregateInputType = {
   description?: true
   status?: true
   projectId?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -153,6 +165,8 @@ export type TaskGroupByOutputType = {
   description: string
   status: $Enums.Status
   projectId: string
+  createdAt: Date
+  updatedAt: Date
   _count: TaskCountAggregateOutputType | null
   _min: TaskMinAggregateOutputType | null
   _max: TaskMaxAggregateOutputType | null
@@ -182,6 +196,8 @@ export type TaskWhereInput = {
   description?: Prisma.StringFilter<"Task"> | string
   status?: Prisma.EnumStatusFilter<"Task"> | $Enums.Status
   projectId?: Prisma.StringFilter<"Task"> | string
+  createdAt?: Prisma.DateTimeFilter<"Task"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Task"> | Date | string
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.ProjectWhereInput>
 }
 
@@ -191,6 +207,8 @@ export type TaskOrderByWithRelationInput = {
   description?: Prisma.SortOrder
   status?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   project?: Prisma.ProjectOrderByWithRelationInput
 }
 
@@ -203,6 +221,8 @@ export type TaskWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringFilter<"Task"> | string
   status?: Prisma.EnumStatusFilter<"Task"> | $Enums.Status
   projectId?: Prisma.StringFilter<"Task"> | string
+  createdAt?: Prisma.DateTimeFilter<"Task"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Task"> | Date | string
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.ProjectWhereInput>
 }, "id" | "title">
 
@@ -212,6 +232,8 @@ export type TaskOrderByWithAggregationInput = {
   description?: Prisma.SortOrder
   status?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.TaskCountOrderByAggregateInput
   _max?: Prisma.TaskMaxOrderByAggregateInput
   _min?: Prisma.TaskMinOrderByAggregateInput
@@ -226,6 +248,8 @@ export type TaskScalarWhereWithAggregatesInput = {
   description?: Prisma.StringWithAggregatesFilter<"Task"> | string
   status?: Prisma.EnumStatusWithAggregatesFilter<"Task"> | $Enums.Status
   projectId?: Prisma.StringWithAggregatesFilter<"Task"> | string
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Task"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Task"> | Date | string
 }
 
 export type TaskCreateInput = {
@@ -233,6 +257,8 @@ export type TaskCreateInput = {
   title: string
   description: string
   status?: $Enums.Status
+  createdAt?: Date | string
+  updatedAt?: Date | string
   project: Prisma.ProjectCreateNestedOneWithoutTaskInput
 }
 
@@ -242,6 +268,8 @@ export type TaskUncheckedCreateInput = {
   description: string
   status?: $Enums.Status
   projectId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type TaskUpdateInput = {
@@ -249,6 +277,8 @@ export type TaskUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectUpdateOneRequiredWithoutTaskNestedInput
 }
 
@@ -258,6 +288,8 @@ export type TaskUncheckedUpdateInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TaskCreateManyInput = {
@@ -266,6 +298,8 @@ export type TaskCreateManyInput = {
   description: string
   status?: $Enums.Status
   projectId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type TaskUpdateManyMutationInput = {
@@ -273,6 +307,8 @@ export type TaskUpdateManyMutationInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TaskUncheckedUpdateManyInput = {
@@ -281,6 +317,8 @@ export type TaskUncheckedUpdateManyInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TaskListRelationFilter = {
@@ -299,6 +337,8 @@ export type TaskCountOrderByAggregateInput = {
   description?: Prisma.SortOrder
   status?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type TaskMaxOrderByAggregateInput = {
@@ -307,6 +347,8 @@ export type TaskMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   status?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type TaskMinOrderByAggregateInput = {
@@ -315,6 +357,8 @@ export type TaskMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   status?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type TaskCreateNestedManyWithoutProjectInput = {
@@ -368,6 +412,8 @@ export type TaskCreateWithoutProjectInput = {
   title: string
   description: string
   status?: $Enums.Status
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type TaskUncheckedCreateWithoutProjectInput = {
@@ -375,6 +421,8 @@ export type TaskUncheckedCreateWithoutProjectInput = {
   title: string
   description: string
   status?: $Enums.Status
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type TaskCreateOrConnectWithoutProjectInput = {
@@ -412,6 +460,8 @@ export type TaskScalarWhereInput = {
   description?: Prisma.StringFilter<"Task"> | string
   status?: Prisma.EnumStatusFilter<"Task"> | $Enums.Status
   projectId?: Prisma.StringFilter<"Task"> | string
+  createdAt?: Prisma.DateTimeFilter<"Task"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Task"> | Date | string
 }
 
 export type TaskCreateManyProjectInput = {
@@ -419,6 +469,8 @@ export type TaskCreateManyProjectInput = {
   title: string
   description: string
   status?: $Enums.Status
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type TaskUpdateWithoutProjectInput = {
@@ -426,6 +478,8 @@ export type TaskUpdateWithoutProjectInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TaskUncheckedUpdateWithoutProjectInput = {
@@ -433,6 +487,8 @@ export type TaskUncheckedUpdateWithoutProjectInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TaskUncheckedUpdateManyWithoutProjectInput = {
@@ -440,6 +496,8 @@ export type TaskUncheckedUpdateManyWithoutProjectInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -450,6 +508,8 @@ export type TaskSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   description?: boolean
   status?: boolean
   projectId?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["task"]>
 
@@ -459,6 +519,8 @@ export type TaskSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   description?: boolean
   status?: boolean
   projectId?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["task"]>
 
@@ -468,6 +530,8 @@ export type TaskSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   description?: boolean
   status?: boolean
   projectId?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["task"]>
 
@@ -477,9 +541,11 @@ export type TaskSelectScalar = {
   description?: boolean
   status?: boolean
   projectId?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type TaskOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "status" | "projectId", ExtArgs["result"]["task"]>
+export type TaskOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "status" | "projectId" | "createdAt" | "updatedAt", ExtArgs["result"]["task"]>
 export type TaskInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
 }
@@ -501,6 +567,8 @@ export type $TaskPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     description: string
     status: $Enums.Status
     projectId: string
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["task"]>
   composites: {}
 }
@@ -930,6 +998,8 @@ export interface TaskFieldRefs {
   readonly description: Prisma.FieldRef<"Task", 'String'>
   readonly status: Prisma.FieldRef<"Task", 'Status'>
   readonly projectId: Prisma.FieldRef<"Task", 'String'>
+  readonly createdAt: Prisma.FieldRef<"Task", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"Task", 'DateTime'>
 }
     
 

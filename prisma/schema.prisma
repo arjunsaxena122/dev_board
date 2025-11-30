@@ -7,6 +7,17 @@ datasource db {
   provider = "postgresql"
 }
 
+enum Roles {
+  ADMIN
+  USER
+}
+
+enum Status {
+  TODO
+  PENDING
+  DONE
+}
+
 model Avatar {
   id        String   @id @default(cuid())
   url       String   @default("https://placehold.co/600x400")
@@ -37,30 +48,23 @@ model User {
 }
 
 model Project {
-  id          String @id @default(cuid())
-  title       String @unique
+  id          String   @id @default(cuid())
+  title       String   @unique
   description String
-  createdById String @unique
-  createdBy   User   @relation(fields: [createdById], references: [id], onDelete: Cascade)
+  createdById String   @unique
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdBy   User     @relation(fields: [createdById], references: [id], onDelete: Cascade)
   Task        Task[]
 }
 
 model Task {
-  id          String  @id @default(cuid())
-  title       String  @unique
+  id          String   @id @default(cuid())
+  title       String   @unique
   description String
-  status      Status  @default(TODO)
+  status      Status   @default(TODO)
   projectId   String
-  project     Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
-}
-
-enum Roles {
-  ADMIN
-  USER
-}
-
-enum Status {
-  TODO
-  PENDING
-  DONE
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
 }

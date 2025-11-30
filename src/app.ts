@@ -21,10 +21,12 @@ app.use(limiter);
 
 // Routes
 
+import healthRouter from "./routes/health.route"
 import userRouter from "./routes/user.route";
 import projectRouter from "./routes/project.route";
 import taskRouter from "./routes/task.route";
 
+app.use(healthRouter)
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/project", projectRouter);
 app.use("/api/v1/project/:pid/task", taskRouter);

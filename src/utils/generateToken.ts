@@ -1,5 +1,5 @@
 import { env } from "../config/config";
-import prisma from "../db/db";
+import { prisma } from "../lib/prisma";
 import { ApiError } from "./api-error";
 import jwt from "jsonwebtoken";
 

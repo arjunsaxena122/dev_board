@@ -8,8 +8,8 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/Avatar.js'
-export type * from './models/User.js'
-export type * from './models/Project.js'
-export type * from './models/Task.js'
-export type * from './commonInputTypes.js'
+export type * from './models/Avatar'
+export type * from './models/User'
+export type * from './models/Project'
+export type * from './models/Task'
+export type * from './commonInputTypes'

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import prisma from "../db/db";
+import { prisma } from "../lib/prisma";
 
 
 export const userRegisterValidationSchema = z.object({

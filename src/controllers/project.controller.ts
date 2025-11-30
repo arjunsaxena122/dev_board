@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { asyncHandler } from "../utils/async-handler";
 import { ApiError } from "../utils/api-error";
 import { Iuser } from "../middlewares/auth.middleware";
-import prisma from "../db/db";
+import { prisma } from "../lib/prisma";
 import { ApiResponse } from "../utils/api-response";
 
 export const createProject = asyncHandler(

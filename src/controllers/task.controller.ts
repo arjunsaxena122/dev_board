@@ -1,4 +1,4 @@
-import prisma from "../db/db";
+import { prisma } from "../lib/prisma";
 import { ApiError } from "../utils/api-error";
 import { ApiResponse } from "../utils/api-response";
 import { asyncHandler } from "../utils/async-handler";

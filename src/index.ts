@@ -9,7 +9,7 @@ prisma
   .then(() =>
     app.listen(port, () => console.log(`Server is running at port:- ${port}`))
   )
-  .catch((err) => {
+  .catch((err: unknown) => {
     console.log(`ERROR: Datatbase connection failed due to ${err}`);
     process.exit(1);
   });

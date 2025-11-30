@@ -12,7 +12,7 @@
  */
 
 import * as runtime from "@prisma/client/runtime/client"
-import type * as Prisma from "./prismaNamespace.js"
+import type * as Prisma from "./prismaNamespace"
 
 
 const config: runtime.GetPrismaClientConfig = {
@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.0.1",
   "engineVersion": "f09f2815f091dbba658cdcd2264306d88bb5bda6",
   "activeProvider": "postgresql",
-  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel Avatar {\n  id        String   @id @default(cuid())\n  url       String   @default(\"https://placehold.co/600x400\")\n  localPath String   @default(\"\")\n  userId    String   @unique\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n}\n\nmodel User {\n  id                          String    @id @default(cuid())\n  username                    String    @unique\n  fullname                    String    @default(\"John Doe\")\n  email                       String    @unique\n  isEmailVerified             Boolean   @default(false)\n  password                    String\n  emailValidationToken        String?\n  emailValidationTokenExpiry  DateTime?\n  refreshToken                String?\n  forgetValidationToken       String?\n  forgetValidationTokenExpiry DateTime?\n  role                        Roles     @default(USER)\n  createdAt                   DateTime  @default(now())\n  updatedAt                   DateTime  @updatedAt\n  avatar                      Avatar?\n  Project                     Project?\n}\n\nmodel Project {\n  id          String @id @default(cuid())\n  title       String @unique\n  description String\n  createdById String @unique\n  createdBy   User   @relation(fields: [createdById], references: [id], onDelete: Cascade)\n  Task        Task[]\n}\n\nmodel Task {\n  id          String  @id @default(cuid())\n  title       String  @unique\n  description String\n  status      Status  @default(TODO)\n  projectId   String\n  project     Project @relation(fields: [projectId], references: [id], onDelete: Cascade)\n}\n\nenum Roles {\n  ADMIN\n  USER\n}\n\nenum Status {\n  TODO\n  PENDING\n  DONE\n}\n",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel Avatar {\n  id        String   @id @default(cuid())\n  url       String   @default(\"https://placehold.co/600x400\")\n  localPath String   @default(\"\")\n  userId    String   @unique\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n}\n\nmodel User {\n  id                          String    @id @default(cuid())\n  username                    String    @unique\n  fullname                    String    @default(\"John Doe\")\n  email                       String    @unique\n  isEmailVerified             Boolean   @default(false)\n  password                    String\n  emailValidationToken        String?\n  emailValidationTokenExpiry  DateTime?\n  refreshToken                String?\n  forgetValidationToken       String?\n  forgetValidationTokenExpiry DateTime?\n  role                        Roles     @default(USER)\n  createdAt                   DateTime  @default(now())\n  updatedAt                   DateTime  @updatedAt\n  avatar                      Avatar?\n  Project                     Project?\n}\n\nmodel Project {\n  id          String @id @default(cuid())\n  title       String @unique\n  description String\n  createdById String @unique\n  createdBy   User   @relation(fields: [createdById], references: [id], onDelete: Cascade)\n  Task        Task[]\n}\n\nmodel Task {\n  id          String  @id @default(cuid())\n  title       String  @unique\n  description String\n  status      Status  @default(TODO)\n  projectId   String\n  project     Project @relation(fields: [projectId], references: [id], onDelete: Cascade)\n}\n\nenum Roles {\n  ADMIN\n  USER\n}\n\nenum Status {\n  TODO\n  PENDING\n  DONE\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -37,10 +37,10 @@ async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Modul
 }
 
 config.compilerWasm = {
-  getRuntime: async () => await import("@prisma/client/runtime/query_compiler_bg.postgresql.mjs"),
+  getRuntime: async () => await import("@prisma/client/runtime/query_compiler_bg.postgresql.js"),
 
   getQueryCompilerWasmModule: async () => {
-    const { wasm } = await import("@prisma/client/runtime/query_compiler_bg.postgresql.wasm-base64.mjs")
+    const { wasm } = await import("@prisma/client/runtime/query_compiler_bg.postgresql.wasm-base64.js")
     return await decodeBase64AsWasm(wasm)
   }
 }

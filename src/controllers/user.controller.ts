@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { asyncHandler } from "../utils/async-handler";
 import { ApiError } from "../utils/api-error";
-import prisma from "../db/db";
+import {prisma} from "../lib/prisma";
 import { ApiResponse } from "../utils/api-response";
 import bcrypt from "bcryptjs";
 import { env } from "../config/config";

@@ -11,7 +11,7 @@ export const validate =
         for (const src of source) {
           Object.assign(data, req[src])
         }
-        await schema.parseAsync(data);
+        await schema.safeParseAsync(data);
         next();
       } catch (err) {
         throw new ApiError(400, "Zod validation failed", [err]);

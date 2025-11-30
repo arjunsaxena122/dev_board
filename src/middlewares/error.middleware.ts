@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import { ApiError } from "../utils/api-error";
 import { env } from "../config/config";
 
 const errorHandler = async (
@@ -8,7 +7,7 @@ const errorHandler = async (
   res: Response,
   next: NextFunction,
 ) => {
-  const statusCode = Number(err.statusCode) ?? 500;
+  const statusCode = Number(err.statusCode ?? 500);
 
   res.status(statusCode).json({
     message: err.message ?? "Internal server error",

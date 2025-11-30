@@ -1,3 +1,4 @@
+import { ref } from "process";
 import { env } from "../config/config";
 import { prisma } from "../lib/prisma";
 import { ApiError } from "./api-error";
@@ -30,6 +31,19 @@ export const generatAccessAndRefreshToken = async (
       env.REFRESH_TOKEN_KEY,
       { expiresIn: env.REFRESH_TOKEN_EXPIRY as jwt.SignOptions["expiresIn"] },
     );
+
+    const updateRefreshTokenInDB = await prisma.user.update({
+      where: {
+        id
+      },
+      data: {
+        refreshToken
+      }
+    })
+
+    if (!updateRefreshTokenInDB) {
+      throw new ApiError(400, "something issue with updating refresh token in db", [updateRefreshTokenInDB])
+    }
 
     const token = { accessToken, refreshToken };
 

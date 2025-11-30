@@ -47,39 +47,3 @@ export const userLoginValidationSchema = z.object({
     .max(16, { message: "Password length exceed" }),
 });
 
-export const userLogoutValidationSchema = z.object({
-  id: z.string().cuid().refine(async (id) => {
-    const user = await prisma.user.findUnique({
-      where: {
-        id
-      }
-    })
-    // ! I can write also Boolean(user) instead of this !!user
-    return !!user
-  }, "Invalid userID")
-});
-
-export const userGetValidationSchema = z.object({
-  id: z.string().cuid().refine(async (id) => {
-    const user = await prisma.user.findUnique({
-      where: {
-        id
-      }
-    })
-    return !!user
-  }, "Invalid userID")
-});
-
-export const userApiKeyValidationSchema = z.object({
-  id: z.string().cuid().refine(async (id) => {
-    const user = await prisma.user.findUnique({
-      where: {
-        id
-      }
-    })
-    return !!user
-  }, "Invalid userID"),
-
-  refreshToken: z.string().min(1, "RefreshToken is required")
-
-});

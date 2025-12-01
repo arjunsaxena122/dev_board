@@ -29,7 +29,7 @@ import taskRouter from "./routes/task.route";
 app.use(healthRouter)
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/project", projectRouter);
-app.use("/api/v1/project/:pid/task", taskRouter);
+app.use("/api/v1/project/:pid", taskRouter);
 
 // Error Middleware
 import errorHandler from "./middlewares/error.middleware";

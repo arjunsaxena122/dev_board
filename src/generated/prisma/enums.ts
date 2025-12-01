@@ -19,7 +19,7 @@ export type Roles = (typeof Roles)[keyof typeof Roles]
 
 export const Status = {
   TODO: 'TODO',
-  PENDING: 'PENDING',
+  IN_PROGRESS: 'IN_PROGRESS',
   DONE: 'DONE'
 } as const
 

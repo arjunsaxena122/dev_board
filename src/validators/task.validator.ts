@@ -36,10 +36,10 @@ export const updateTaskByIdValidation = z.object({
     tid: z.string().cuid("tid (taskID) is required"),
     title: z.string({
         message: "Title is required"
-    }),
+    }).optional(),
     description: z.string({
         message: "Description is required"
-    }),
+    }).optional(),
     status: z.enum(["TODO", "PENDING", "DONE"], {
         // ! issue :- A object contains details about validation error like code, path, expected, receive
         // ! ctx (context) :- An object containing context about the validation process.
@@ -48,7 +48,7 @@ export const updateTaskByIdValidation = z.object({
                 message: "Invalid task status"
             }
         }
-    })
+    }).optional()
 })
 
 export const deleteTaskByIdValidation = z.object({

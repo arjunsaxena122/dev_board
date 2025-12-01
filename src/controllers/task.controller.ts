@@ -1,3 +1,5 @@
+import { AvialableEnumStatus } from "../constant";
+import { Status } from "../generated/prisma/enums";
 import { prisma } from "../lib/prisma";
 import { ApiError } from "../utils/api-error";
 import { ApiResponse } from "../utils/api-response";
@@ -5,7 +7,7 @@ import { asyncHandler } from "../utils/async-handler";
 
 export const createTask = asyncHandler(async (req, res) => {
   const { pid } = req.params;
-  const { title, description, status } = req.body;
+  const { title, description } = req.body;
 
   if (!pid) {
     throw new ApiError(400, "Project id not found");
@@ -25,12 +27,22 @@ export const createTask = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Project not found");
   }
 
+  const taskTitle = await prisma.task.findUnique({
+    where: {
+      title: String(title)
+    },
+
+  })
+
+  if (taskTitle) {
+    throw new ApiError(409, "Your task title same as previous task title, Please change it!")
+  }
+
   const task = await prisma.task.create({
     data: {
       title,
       description,
-      status,
-      projectId: pid,
+      projectId: String(pid),
     },
   });
 
@@ -57,6 +69,9 @@ export const getAllTask = asyncHandler(async (req, res) => {
     where: {
       projectId: pid,
     },
+    include: {
+      project: true
+    }
   });
 
   if (!task) {
@@ -114,6 +129,11 @@ export const updateTaskById = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Please update something first!");
   }
 
+
+  if (!AvialableEnumStatus.includes(status.toUpperCase())) {
+    throw new ApiError(400, "This status isn't exist")
+  }
+
   const task = await prisma.task.update({
     where: {
       id: tid,
@@ -121,7 +141,7 @@ export const updateTaskById = asyncHandler(async (req, res) => {
     data: {
       title,
       description,
-      status,
+      status: status.toUpperCase() as Status,
     },
   });
 

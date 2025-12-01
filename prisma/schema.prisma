@@ -14,7 +14,7 @@ enum Roles {
 
 enum Status {
   TODO
-  PENDING
+  IN_PROGRESS
   DONE
 }
 

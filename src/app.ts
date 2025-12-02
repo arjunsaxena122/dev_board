@@ -11,6 +11,7 @@ let options = {
   origin: ["*"],
   methods: ["GET", "PUT", "PATCH", "DELETE", "POST"],
   credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization']
 };
 
 app.use(cors(options));
